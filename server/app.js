@@ -11,6 +11,8 @@ var express = require('express')
   , config = require("../oauth.js")
   , request = require('request');
 
+var routes       = require('./../routes/index');
+
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -45,22 +47,22 @@ passport.use(new FacebookStrategy({
       // to associate the Facebook account with a user record in your database,
       // and return that user instead.
       // console.log('profile.likes',profile._json.likes);
-      // var aggregate = profile._json.likes.data;
-      // var populateLikes = function(){
-      //   var url = profile._json.likes.next;
-      //   var requestHandler = function(err, resp, body){
-      //     var body = JSON.parse(body);
-      //     aggregate.concat(body._json.likes.data);
-      //     if (body._json.next){
-      //       request(body._json.next, requestHandler)
-      //     } else {
-      //       //done
-      //       console.log('all data - aggregate', aggregate);
-      //     }
-      //   };
-      //   request(url, requestHandler);
-      // };
-      // populateLikes();
+      var aggregate = profile._json.likes.data;
+      var populateLikes = function(){
+        var url = profile._json.likes.next;
+        var requestHandler = function(err, resp, body){
+          var body = JSON.parse(body);
+          aggregate.concat(body._json.likes.data);
+          if (body._json.next){
+            request(body._json.next, requestHandler)
+          } else {
+            //done
+            console.log('all data - aggregate', aggregate);
+          }
+        };
+        request(url, requestHandler);
+      };
+      populateLikes();
       return done(null, profile);
     });
   }
@@ -73,28 +75,30 @@ var app = express();
 var path = require ('path');
 
 // configure Express
-  app.set('views', path.join(__dirname, '../views'));
-  app.set('view engine', 'ejs');
-  app.use(logger());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+      extended: true
+  }));
   app.use(cookieParser());
-  app.use(bodyParser());
+  // app.use(bodyParser());
   app.use(methodOverride());
   app.use(session({ secret: 'keyboard cat' }));
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(express.static(path.join(__dirname + '.../public')));
-  // app.use(express.static(__dirname + '../public'));
+  // app.use(express.static(path.join(__dirname + '.../public')));
+  app.use(express.static(__dirname + './../public'));
 
 
-app.get('/', function(req, res){
-  res.render('login', { user: req.user });
-});
+app.use('/', routes);
+// app.get('/', function(req, res){
+//   res.json('index', { user: req.user });
+// });
 
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
-});
+// app.get('/account', ensureAuthenticated, function(req, res){
+//   res.render('account', { user: req.user });
+// });
 
 // app.get('/login', function(req, res){
 //   res.render('login', { user: req.user });
