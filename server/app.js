@@ -1,16 +1,14 @@
 var express = require('express')
   , passport = require('passport')
   , util = require('util')
+  , mongoose = require('mongoose')
   , FacebookStrategy = require('passport-facebook').Strategy
   , logger = require('morgan')
   , session = require('express-session')
   , bodyParser = require("body-parser")
   , cookieParser = require("cookie-parser")
-  , methodOverride = require('method-override');
-
-var FACEBOOK_APP_ID = "--insert-facebook-app-id-here--"
-var FACEBOOK_APP_SECRET = "--insert-facebook-app-secret-here--";
-
+  , methodOverride = require('method-override')
+  , config = require('./oauth.js');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -33,9 +31,9 @@ passport.deserializeUser(function(obj, done) {
 //   credentials (in this case, an accessToken, refreshToken, and Facebook
 //   profile), and invoke a callback with a user object.
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
