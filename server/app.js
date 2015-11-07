@@ -88,7 +88,7 @@ app.get('/account', ensureAuthenticated, function(req, res){
 //   redirecting the user to facebook.com.  After authorization, Facebook will
 //   redirect the user back to this application at /auth/facebook/callback
 app.get('/auth/facebook',
-  passport.authenticate('facebook'),
+  passport.authenticate('facebook',{ scope: ['user_likes'] }),
   function(req, res){
     // The request will be redirected to Facebook for authentication, so this
     // function will not be called.
