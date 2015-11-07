@@ -11,5 +11,8 @@
     "express-session": ">= 1.6.1",
     "passport": ">= 0.0.0",
     "passport-facebook": ">= 0.0.0"
+  },
+  "devDependencies": {
+    "mongoose": "^4.2.4"
   }
 }
