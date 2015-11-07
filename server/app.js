@@ -43,7 +43,22 @@ passport.use(new FacebookStrategy({
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Facebook account with a user record in your database,
       // and return that user instead.
-      
+      // console.log('profile.likes',profile._json.likes);
+      var aggregate = profile._json.likes.data;
+      var populateLikes = function(){
+        var url = profile._json.likes.next;
+        var requestHandler = function(err, resp, body){
+          var body = JSON.parse(body);
+          aggregate.concat(body._json.likes.data);
+          if (body._json.next){
+            request(body._json.next, )
+          } else {
+            //done
+            console.log('all data - aggregate', aggregate);
+          }
+        };
+        request(url, requestHandler);
+      };
       return done(null, profile);
     });
   }
@@ -67,7 +82,7 @@ var path = require ('path');
   // persistent login sessions (recommended).
   app.use(passport.initialize());
   app.use(passport.session());
-app.use(express.static(path.join(__dirname + '.../public')));
+  app.use(express.static(path.join(__dirname + '.../public')));
   // app.use(express.static(__dirname + '../public'));
 
 
