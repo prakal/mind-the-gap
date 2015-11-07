@@ -8,7 +8,8 @@ var express = require('express')
   , bodyParser = require("body-parser")
   , cookieParser = require("cookie-parser")
   , methodOverride = require('method-override')
-  , config = require("../oauth.js");
+  , config = require("../oauth.js")
+  , request = require('request');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -44,21 +45,22 @@ passport.use(new FacebookStrategy({
       // to associate the Facebook account with a user record in your database,
       // and return that user instead.
       // console.log('profile.likes',profile._json.likes);
-      var aggregate = profile._json.likes.data;
-      var populateLikes = function(){
-        var url = profile._json.likes.next;
-        var requestHandler = function(err, resp, body){
-          var body = JSON.parse(body);
-          aggregate.concat(body._json.likes.data);
-          if (body._json.next){
-            request(body._json.next)
-          } else {
-            //done
-            console.log('all data - aggregate', aggregate);
-          }
-        };
-        request(url, requestHandler);
-      };
+      // var aggregate = profile._json.likes.data;
+      // var populateLikes = function(){
+      //   var url = profile._json.likes.next;
+      //   var requestHandler = function(err, resp, body){
+      //     var body = JSON.parse(body);
+      //     aggregate.concat(body._json.likes.data);
+      //     if (body._json.next){
+      //       request(body._json.next, requestHandler)
+      //     } else {
+      //       //done
+      //       console.log('all data - aggregate', aggregate);
+      //     }
+      //   };
+      //   request(url, requestHandler);
+      // };
+      // populateLikes();
       return done(null, profile);
     });
   }
