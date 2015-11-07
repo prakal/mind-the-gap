@@ -8,7 +8,7 @@ var express = require('express')
   , bodyParser = require("body-parser")
   , cookieParser = require("cookie-parser")
   , methodOverride = require('method-override')
-  , config = require('./oauth.js');
+  , config = require("../oauth.js");
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
