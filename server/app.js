@@ -51,7 +51,7 @@ passport.use(new FacebookStrategy({
           var body = JSON.parse(body);
           aggregate.concat(body._json.likes.data);
           if (body._json.next){
-            request(body._json.next, )
+            request(body._json.next)
           } else {
             //done
             console.log('all data - aggregate', aggregate);
@@ -82,7 +82,7 @@ var path = require ('path');
   // persistent login sessions (recommended).
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(express.static(path.join(__dirname + '.../public')));
+  app.use(express.static(__dirname + '/public'));
   // app.use(express.static(__dirname + '../public'));
 
 
