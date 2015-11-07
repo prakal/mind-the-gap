@@ -71,16 +71,16 @@ app.use(express.static(path.join(__dirname + '.../public')));
 
 
 app.get('/', function(req, res){
-  res.render('index', { user: req.user });
+  res.render('login', { user: req.user });
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
-app.get('/login', function(req, res){
-  res.render('login', { user: req.user });
-});
+// app.get('/login', function(req, res){
+//   res.render('login', { user: req.user });
+// });
 
 // GET /auth/facebook
 //   Use passport.authenticate() as route middleware to authenticate the
