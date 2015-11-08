@@ -37,8 +37,8 @@
               md-colspan-gt-sm="{{tile.tile.colspan}}"
               md-rowspan-gt-sm="{{tile.tile.rowspan}}" class="md-primary md-raised" ng-click="showTabDialog($event,tile.data)" flex-sm="100" flex-md="100" flex-gt-md="auto"> {{tile.data.city.toUpperCase()}}
 
-          <md-grid-tile-footer>
-            <md-button layout-align="center center" class="md-warn md-raised md-hue-2">{{tile.data.flight.price | currency}}</md-button>
+          <md-grid-tile-footer layout-align="center center" hide-sm hide-md>
+            {{tile.data.flight.price | currency}}
 
           </md-grid-tile-footer>
           </md-grid-tile>
