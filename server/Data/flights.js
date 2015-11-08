@@ -15,7 +15,7 @@ var flights = [
         dest: 'detroit',
         departureTime: '2015-12-24T21:00:00',
         arrivalTime: '2015-12-24T21:00:00',
-        price: '1500' },
+        price: '500' },
 
     { origin: 'san francisco',
         dest: 'chicago',
@@ -57,7 +57,7 @@ var flights = [
         dest: 'miami',
         departureTime: '2015-12-24T21:00:00',
         arrivalTime: '2015-12-24T21:00:00',
-        price: '2000' },
+        price: '200' },
 ];
 module.exports = flights;
 /*
