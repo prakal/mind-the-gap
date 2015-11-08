@@ -16,7 +16,7 @@
                  <md-list-item class="md-3-line" ng-repeat="event in items.events">
                    <img ng-src="{{event.imageUrl}}?{{$index}}" class="md-avatar" alt="{{event.name}}" />
                    <div class="md-list-item-text" layout="column">
-                     <a ng-href = "http://www.stubhub.com/{{event.webURI}}">{{ event.name }}</a>
+                     <a ng-href = "http://www.stubhub.com/{{event.webURI}}" target="_blank">{{ event.name }}</a>
                      <p>{{ event.eventDateLocal |  date : 'MM/dd/yyyy' }}</p>
                    </div>
                  <md-divider ></md-divider>
