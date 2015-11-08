@@ -1,19 +1,12 @@
-angular.module('headcount.events', [])
+angular.module('volare.events', [])
 
-.controller('EventsController', function ($scope, $http, $window, $timeout, $q, EventsFactory) {
+.controller('EventsController', function ($scope, $http, $window, $timeout, $q) {
+    console.log('something happend');
 
   // Stores all events that were created by you or that you were invited to
-$scope.user = {
-      title: '',
-      email: '',
+  $scope.user = {
       firstName: '',
       lastName: '' ,
-      company: '' ,
-      address: '' ,
-      city: '' ,
-      state: '' ,
-      description: '',
-      postalCode : ''
     };
   }
 );
