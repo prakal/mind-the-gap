@@ -2,7 +2,7 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>{{items.city}}</h2>
+        <h2>{{items.city.toUpperCase()}}</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()">
           <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -17,7 +17,7 @@
                    <img ng-src="{{event.imageUrl}}?{{$index}}" class="md-avatar" alt="{{event.name}}" />
                    <div class="md-list-item-text" layout="column">
                      <a ng-href = "http://www.stubhub.com/{{event.webURI}}">{{ event.name }}</a>
-                     <p>{{ event.eventDateLocal.toString() }}</p>
+                     <p>{{ event.eventDateLocal |  date : 'MM/dd/yyyy' }}</p>
                    </div>
                  <md-divider ></md-divider>
                  </md-list-item>
