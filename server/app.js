@@ -12,7 +12,8 @@ var express = require('express')
   , config = require("../oauth.js")
   , request = require('request');
 var userFacebookLikes = [];
-
+var events = [];
+var cities = ['new york', 'las vegas', 'sydney', 'tokyo', 'mexico city', 'dubai',  'london', 'los angeles', 'berlin', 'paris'];
 var routes  = require('./../routes/index');
 
 // Passport session setup.
