@@ -56,24 +56,32 @@ angular.module('volare.events', ['ngMaterial'])
       // chunk colorTiles with response data
       for (var i = 0; i < colorTiles.length; i++){
         $scope.chunkData.push({'tile': colorTiles[i],'data': res.data[i]});
-        ($scope.showTabDialog = function(ev) {
-            $mdDialog.show({
-              templateUrl: 'tabDialog.tmpl.html',
-              targetEvent: ev,
-              clickOutsideToClose:true,
-              locals:{
-                items: $scope.chunkData[i]
-              }
-            })
-                .then(function(answer) {
-                  console.log('answer',answer);
-                  $scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                  $scope.status = 'You cancelled the dialog.';
-                });
-          })(i);
 
       }
+      $scope.showTabDialog = function(ev, params) {
+          $mdDialog.show({
+            templateUrl: 'tabDialog.tmpl.html',
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals:{
+              items: params
+            },
+            controller: DialogController
+          })
+              .then(function(answer) {
+                console.log('answer',answer);
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+        };
+      function DialogController($scope, $mdDialog, items) {
+              $scope.items = items;
+              $scope.closeDialog = function() {
+                $mdDialog.hide();
+              }
+            }
+
       function randomColor() {
         return COLORS[Math.floor(Math.random() * COLORS.length)];
       }

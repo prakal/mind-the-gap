@@ -1,8 +1,6 @@
 <md-toolbar>
       <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings">
           <img src="volarelogo01.png"/>
-        </md-button>
         <h2>
           <span>Volare</span>
         </h2> 
@@ -39,7 +37,7 @@
                 'background': tile.tile.color
               }"
               md-colspan-gt-sm="{{tile.tile.colspan}}"
-              md-rowspan-gt-sm="{{tile.tile.rowspan}}" class="md-primary md-raised" ng-click="showTabDialog($event)" flex-sm="100" flex-md="100" flex-gt-md="auto"> {{tile.data.city}} {{tile.data.flight.price}}
+              md-rowspan-gt-sm="{{tile.tile.rowspan}}" class="md-primary md-raised" ng-click="showTabDialog($event,tile.data)" flex-sm="100" flex-md="100" flex-gt-md="auto"> {{tile.data.city}} {{tile.data.flight.price}}
           </md-grid-tile>
         </md-grid-list>
 
