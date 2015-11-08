@@ -11,9 +11,9 @@ var express = require('express')
   , methodOverride = require('method-override')
   , config = require("../oauth.js")
   , request = require('request');
-var userFacebookLikes = [];
-var events = [];
-var cities = ['new york', 'las vegas', 'sydney', 'tokyo', 'mexico city', 'dubai',  'london', 'los angeles', 'berlin', 'paris'];
+var userFacebookLikes = [{'name':'Anthony Cools'}];
+var cityEvents = [];
+var cities = ['new york', 'las vegas', 'san francisco', 'Chicago', 'san diego', 'seattle',  'london', 'los angeles', 'berlin', 'miami'];
 var routes  = require('./../routes/index');
 
 // Passport session setup.
@@ -94,7 +94,10 @@ function getEventsFromDates(startDate,endDate,city,callback){
         }
     },function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            events = events.concat(JSON.parse(body).events);
+            var currentEvents = {};
+            currentEvents.city = cities[city];
+            currentEvents.events = JSON.parse(body).events;
+            cityEvents = cityEvents.concat(currentEvents);
             if(city < cities.length - 1){
                 city = city + 1;
                 getEventsFromDates(startDate,endDate,city,callback);
@@ -107,7 +110,17 @@ function getEventsFromDates(startDate,endDate,city,callback){
 
 function getEventsFromLikes(){
     var eventsFromLikes = [];
-    eventsFromLikes = events;
+    for (cityEvent in cityEvents){
+        for(event in cityEvents[cityEvent].events){
+            for(like in userFacebookLikes){
+                var eventName = cityEvents[cityEvent].events[event].name;
+                var userLike = userFacebookLikes[like].name;
+               if(eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
+                   eventsFromLikes.push(cityEvents[cityEvent].events[event]);
+               }
+            }
+        }
+    }
     return eventsFromLikes;
 }
 
