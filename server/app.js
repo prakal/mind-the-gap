@@ -13,7 +13,7 @@ var express = require('express')
   , request = require('request');
 var userFacebookLikes = [];
 
-var routes       = require('./../routes/index');
+var routes  = require('./../routes/index');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -102,11 +102,11 @@ var path = require ('path');
   // persistent login sessions (recommended).
   app.use(passport.initialize());
   app.use(passport.session());
-  // app.use(express.static(path.join(__dirname + '.../public')));
   app.use(express.static(__dirname + './../public'));
+  // app.use(express.static(path.join(__dirname + '.../public')));
 
 
-app.use('/', routes);
+// app.use('/', routes);
 // app.get('/', function(req, res){
 //   res.json('index', { user: req.user });
 // });
@@ -142,10 +142,9 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   });
 
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+// app.use(function(req, res){
+//   res.redirect('/');
+// });
 
 //app.listen(3000);
 // start server on the specified port and binding host
