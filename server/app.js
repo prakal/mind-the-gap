@@ -10,6 +10,7 @@ var express = require('express')
   , methodOverride = require('method-override')
   , config = require("../oauth.js")
   , request = require('request');
+var userFacebookLikes = [];
 
 var routes  = require('./../routes/index');
 
@@ -47,28 +48,35 @@ passport.use(new FacebookStrategy({
       // to associate the Facebook account with a user record in your database,
       // and return that user instead.
       // console.log('profile.likes',profile._json.likes);
-      var aggregate = profile._json.likes.data;
-      var populateLikes = function(){
-        var url = profile._json.likes.next;
-        var requestHandler = function(err, resp, body){
-          var body = JSON.parse(body);
-          aggregate.concat(body._json.likes.data);
-          if (body._json.next){
-            request(body._json.next, requestHandler)
-          } else {
-            //done
-            console.log('all data - aggregate', aggregate);
-          }
-        };
-        request(url, requestHandler);
-      };
-      populateLikes();
-      return done(null, profile);
+      userFacebookLikes = userFacebookLikes.concat(profile._json.likes);
+      if(profile._json.likes.paging.next){
+          getFacebookLikes(profile._json.likes.paging.next, function(){
+            return done(null, profile);
+          });
+      }
     });
   }
 ));
 
+function getFacebookLikes(facebookLikesUrl,callback){
+    request.get({
+        url: facebookLikesUrl,
+        json: true
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            userFacebookLikes =  userFacebookLikes.concat(body.data);
+            if (body.paging.next) { // if set, this is the next URL to query
+                getFacebookLikes(body.paging.next, callback);
+            } else {
+                callback(); //Call when we are finished
+            }
+        } else {
+            console.log(error);
+            throw error;
+        }
 
+    });
+}
 
 
 var app = express();
