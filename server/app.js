@@ -1,4 +1,5 @@
 var express = require('express')
+  , cfenv = require('cfenv')
   , passport = require('passport')
   , util = require('util')
   , mongoose = require('mongoose')
@@ -80,6 +81,12 @@ function getFacebookLikes(facebookLikesUrl,callback){
 
 
 var app = express();
+
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
+
+
+
 var path = require ('path');
 
 // configure Express
@@ -139,8 +146,13 @@ app.get('/auth/facebook/callback',
 //   res.redirect('/');
 // });
 
-app.listen(3000);
+//app.listen(3000);
+// start server on the specified port and binding host
+app.listen(appEnv.port, '0.0.0.0', function() {
 
+	// print a message when the server starts listening
+  console.log("server starting on " + appEnv.url);
+});
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
