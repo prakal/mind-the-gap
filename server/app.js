@@ -121,7 +121,7 @@ function getEventsFromLikes(){
             for(like in userFacebookLikes){
                 var eventName = cityEvents[cityEvent].events[event].name;
                 var userLike = userFacebookLikes[like].name;
-               if(eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
+               if(userLike &&  eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
                    currentCity.events.push(cityEvents[cityEvent].events[event]);
                }
             }
