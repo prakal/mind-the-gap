@@ -1,19 +1,13 @@
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1 ">
-            <h3>Current location:</h3>
-            <input type="text"placeholder="San Francisco">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h1 class="panel-title">CHOOSE DATE</h1>
-            </div>
-
-          </div>
-        </div>
+<md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings">
+          <img src="volarelogo01.png"/>
+        </md-button>
+        <h2>
+          <span>Volare</span>
+        </h2> 
       </div>
-    </div>
+    </md-toolbar>
     <div ng-controller="EventsController" style='padding: 40px;'>
       <md-content>
         <div layout="row" layout-sm="column">
@@ -55,11 +49,6 @@
         <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
     </div>
     <div class="event" ng-model="event" >
-      <div class="info"  >
-        <div id="{{ 'event-' + $index }}" class="info"  >
-          <span> <strong> {{ event.title }} </strong> </span> <br />
-        </div>
-      </div>
       <button ng-model="hasNot" ng-click="search();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"> Search! </button>
     </div>
 
