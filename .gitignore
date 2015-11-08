@@ -1,2 +1,5 @@
 node_modules
 oauth.js
+.idea/
+mind-the-gap.iml
+npm-debug.log
