@@ -6,7 +6,8 @@ body {
   background-image: url("https://images.unsplash.com/photo-1444623151656-030273ddb785?dpr=2&fit=crop&fm=jpg&h=675&ixlib=rb-0.3.5&q=50&w=1300");
 }
 #welcome {
-  color: white;
+  color: #CCCCCC;
+  padding-top: 100px;
 }
 section {
   height: 600px; 
@@ -14,7 +15,7 @@ section {
 .carddemoBasicUsage md-card {
   min-height: 150px; }
  
- .mdl-button, .panel-heading, .panel-title{
+ .mdl-button, .panel-heading, .panel-title, #header{
   background: -webkit-linear-gradient(-45deg, red, #ba1a0f);
   border: 0;
   color: white;
