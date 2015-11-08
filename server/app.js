@@ -218,13 +218,22 @@ app.post('/volare/search/',function(req,res){
     var startDate = req.body.startDate;
     var endDate = req.body.endDate;
     var city = 0;
-    flights = getFlights(startDate,endDate);
-    getEventsFromDates(startDate,endDate,city, function(){
-        res.send(getEventsFromLikes());
-    });
+
+    if(datesAreValid(startDate,endDate)) {
+        flights = getFlights(startDate, endDate);
+        getEventsFromDates(startDate, endDate, city, function () {
+            res.send(getEventsFromLikes());
+        });
+    } else{
+        res.status(500).json({"error":"Incorrect Date: Start Date must be Before End Date."});
+    }
 });
 
-
+function datesAreValid(startDate,endDate){
+    var startDateTimeStamp =  new Date(Date.parse(startDate));
+    var endDateTimeStamp =  new Date(Date.parse(endDate));
+    return startDateTimeStamp <= endDateTimeStamp;
+}
 
 //app.listen(3000);
 // start server on the specified port and binding host
