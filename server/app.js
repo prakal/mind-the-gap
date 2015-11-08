@@ -80,6 +80,37 @@ function getFacebookLikes(facebookLikesUrl,callback){
 }
 
 
+function getEventsFromDates(startDate,endDate,city,callback){
+
+    var stubhubUrl = util.format("https://api.stubhub.com/search/catalog/events/v3?city=%s&date=%s TO %s",
+        cities[city],startDate,endDate);
+
+    request.get({
+        url: stubhubUrl,
+        headers: {
+            'Authorization': 'Bearer NNi1xN62e40VxTtbXkMofTx1PRYa',
+            'Content-Type': 'application/json'
+        }
+    },function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            events = events.concat(JSON.parse(body).events);
+            if(city < cities.length - 1){
+                city = city + 1;
+                getEventsFromDates(startDate,endDate,city,callback);
+            } else{
+                callback();
+            }
+        }
+    });
+}
+
+function getEventsFromLikes(){
+    var eventsFromLikes = [];
+    eventsFromLikes = events;
+    return eventsFromLikes;
+}
+
+
 var app = express();
 
 // get the app environment from Cloud Foundry
@@ -145,6 +176,16 @@ app.get('/auth/facebook/callback',
 // app.use(function(req, res){
 //   res.redirect('/');
 // });
+
+
+app.post('/volare/search/',function(req,res){
+    var startDate = req.body.startDate;
+    var endDate = req.body.endDate;
+    var city = 0;
+    getEventsFromDates(startDate,endDate,city, function(){
+        res.send(getEventsFromLikes());
+    });
+});
 
 //app.listen(3000);
 // start server on the specified port and binding host
