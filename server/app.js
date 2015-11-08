@@ -13,8 +13,9 @@ var express = require('express')
   , request = require('request');
 var userFacebookLikes = [{'name':'Anthony Cools'}];
 var cityEvents = [];
-var cities = ['new york', 'las vegas', 'san francisco', 'Chicago', 'san diego', 'seattle',  'london', 'los angeles', 'berlin', 'miami'];
+var cities = ['new york', 'las vegas', 'detroit', 'chicago', 'san diego', 'seattle',  'london', 'los angeles', 'berlin', 'miami'];
 var routes  = require('./../routes/index');
+var flights = require('./Data/flights.js');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -97,6 +98,7 @@ function getEventsFromDates(startDate,endDate,city,callback){
             var currentEvents = {};
             currentEvents.city = cities[city];
             currentEvents.events = JSON.parse(body).events;
+            currentEvents.flight = getFlightByName(currentEvents.city);
             cityEvents = cityEvents.concat(currentEvents);
             if(city < cities.length - 1){
                 city = city + 1;
@@ -111,19 +113,31 @@ function getEventsFromDates(startDate,endDate,city,callback){
 function getEventsFromLikes(){
     var eventsFromLikes = [];
     for (cityEvent in cityEvents){
+        currentCity = {};
+        currentCity.city = cityEvents[cityEvent].city;
+        currentCity.flight = cityEvents[cityEvent].flight;
+        currentCity.events = [];
         for(event in cityEvents[cityEvent].events){
             for(like in userFacebookLikes){
                 var eventName = cityEvents[cityEvent].events[event].name;
                 var userLike = userFacebookLikes[like].name;
                if(eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
-                   eventsFromLikes.push(cityEvents[cityEvent].events[event]);
+                   currentCity.events.push(cityEvents[cityEvent].events[event]);
                }
             }
         }
+        eventsFromLikes.push(currentCity);
     }
     return eventsFromLikes;
 }
 
+function getFlightByName(name){
+    for(flight in flights){
+        if(flights[flight].dest == name){
+            return flights[flight];
+        }
+    }
+}
 
 var app = express();
 
@@ -191,15 +205,25 @@ app.get('/auth/facebook/callback',
 //   res.redirect('/');
 // });
 
+function getFlights(startDate,endDate){
+    for(flight in flights){
+        flights[flight].departureTime = endDate;
+        flights[flight].arrivalTime = startDate;
+    }
+    return flights;
+}
 
 app.post('/volare/search/',function(req,res){
     var startDate = req.body.startDate;
     var endDate = req.body.endDate;
     var city = 0;
+    flights = getFlights(startDate,endDate);
     getEventsFromDates(startDate,endDate,city, function(){
         res.send(getEventsFromLikes());
     });
 });
+
+
 
 //app.listen(3000);
 // start server on the specified port and binding host
