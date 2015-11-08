@@ -1,4 +1,4 @@
-   
+
     <div ng-controller="EventsController" style='padding: 40px;'>
       <md-content>
         <h4>Date-picker</h4>
@@ -20,7 +20,7 @@
         </div>
         
       </md-content>
-      <md-content layout-padding>
+      <md-content layout-padding >
         <md-grid-list
             md-cols-gt-md="12" md-cols-sm="3" md-cols-md="8"
             md-row-height-gt-md="1:1" md-row-height="4:3"
@@ -37,12 +37,17 @@
 
       </md-content>
     </div>
-    <div class="event" ng-model="event">
-      <div class="info" >
-        <div id="{{ 'event-' + $index }}" class="info" >
+    <div layout="row" layout-align="center center">
+        <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
+    </div>
+    <div class="event" ng-model="event" >
+      <div class="info"  >
+        <div id="{{ 'event-' + $index }}" class="info"  >
           <span> <strong> {{ event.title }} </strong> </span> <br />
         </div>
       </div>
       <button ng-model="hasNot" ng-click="search();"> Search! </button>
     </div>
+
+
 
