@@ -1,7 +1,6 @@
 
     <div ng-controller="EventsController" style='padding: 40px;'>
       <md-content>
-        <h4>Date-picker</h4>
         <div layout="row" layout-sm="column">
           <div flex>
             <form name="myForm">
@@ -45,7 +44,7 @@
           <span> <strong> {{ event.title }} </strong> </span> <br />
         </div>
       </div>
-      <button ng-model="hasNot" ng-click="search();"> Search! </button>
+      <button ng-model="hasNot" ng-click="search();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"> Search! </button>
     </div>
 
 

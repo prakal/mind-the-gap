@@ -4,7 +4,17 @@
 		<title>Volare</title>
 		<meta charset="utf-8" />
 	    <meta name="viewport" content="initial-scale=1" />
-
+<!--  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- FONTS -->
+<link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+<!-- MATERIAL -->
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- FONTAWESOME -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--  -->
 	    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css" type="text/css">
 	    <link rel="stylesheet" type="text/css" href="styles/style.css" type="text/css"/>
 
@@ -16,16 +26,44 @@
 
 	</head>
 	<body layout="column">
-    <md-toolbar layout="row" md-ink-ripple class="md-default-theme">
+    <!-- <md-toolbar layout="row" md-ink-ripple class="md-default-theme"> -->
       <!-- <a class="toolbar_buttons" href="#newevent" flex="5"><i class="fa fa-plus fa-2x"></i></a> -->
       <!-- <a class="toolbar_buttons" href="#events" flex="5"><i class="fa fa-users fa-2x"></i></a> -->
-      <h1 class="md-toolbar-tools" layout-align-gt-sm="center">Volare</h1>
-
+ <!--      <h1 class="md-toolbar-tools" layout-align-gt-sm="center">Volare</h1>
+ -->
       <!-- <a class="toolbar_buttons" href="#accounts" flex="5"><i class="fa fa-cog fa-2x"></i></a> -->
       <!-- <div class="toolbar_buttons" flex="5" ng-controller="AuthController" ng-click="signout()"><i class="fa fa-sign-out fa-2x"></i></div> -->
-    </md-toolbar>
+    <!-- </md-toolbar> -->
+<!-- -->
+<section id="welcome">
+<br>
+<br>
+<br>
+<img src="volarelogo01.png"><br><br><br>
+<h5 class="greyword">Meet your favorite artists in your next favorite city.</h5><br>
+<h3>Current location:</h3>
+    <input type="text"placeholder="San Francisco"width=30>
+<br><hr><br>
+<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="fa fa-facebook-official"></i> Login wtih Facebook</button><!-- 
+<div class="arrow-right"></div> -->
+</section>
+<section id="pickdates">
 
-    <div ng-view></div>
+<br><br><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 ">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">CHOOSE DATE</h1>
+  </div>
+  <div class="panel-body">
+      <div ng-view></div>
+  </div>
+</div>
+</div></div></div>
+</section>
+<!--  -->
     <script src="app/events/events.js"></script>
     <script src="app/auth/auth.js"></script>
     <script src="app/app.js"></script>
