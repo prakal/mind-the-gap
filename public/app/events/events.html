@@ -1,9 +1,31 @@
+   
+    <div ng-controller="EventsController" style='padding: 40px;'>
+      <md-content>
+        <h4>Date-picker</h4>
+        <div layout="row" layout-sm="column">
+          <div flex>
+            <form name="myForm">
+              <md-datepicker name="dateField" ng-model="startDate" md-placeholder="Enter date"
+                required md-min-date="minDate" md-max-date="maxDate" ng-change="setNewDate();"></md-datepicker>
+            </form>
+          </div>
+
+          <div flex>
+            <form name="myForm">
+              <md-datepicker name="dateField" ng-model="endDate" md-placeholder="Enter date"
+                required md-min-date="minDate" md-max-date="maxDate" ng-change="setNewDate();"></md-datepicker>
+            </form>
+          </div>
+
+        </div>
+        
+      </md-content>
+    </div>
     <div class="event" ng-model="event">
       <div class="info" >
-        <img width="100px" height="100px" src="{{event.image}}" />
         <div id="{{ 'event-' + $index }}" class="info" >
           <span> <strong> {{ event.title }} </strong> </span> <br />
         </div>
       </div>
-      <button ng-model="hasNotAuthorizedVenmo" ng-disabled="hasNotAuthorizedVenmo" ng-click="acceptOrDeclineInvite(true, event)"> Book! </button>
+      <button ng-model="hasNot" ng-click="search();"> Search! </button>
     </div>
