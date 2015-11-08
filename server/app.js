@@ -10,12 +10,12 @@ var express = require('express')
   , cookieParser = require("cookie-parser")
   , methodOverride = require('method-override')
   , config = require("../oauth.js")
-  , request = require('request');
-var userFacebookLikes = [{'name':'Anthony Cools'}];
-var cityEvents = [];
-var cities = ['new york', 'las vegas', 'detroit', 'chicago', 'san diego', 'seattle',  'london', 'los angeles', 'berlin', 'miami'];
-var routes  = require('./../routes/index');
-var flights = require('./Data/flights.js');
+  , request = require('request')
+  , userFacebookLikes = [{'name':'Anthony Cools'}]
+  , cityEvents = []
+  , cities = ['new york', 'las vegas', 'detroit', 'chicago', 'san diego', 'seattle',  'london', 'los angeles', 'berlin', 'miami']
+  , routes  = require('./../routes/index')
+  , flights = require('./Data/flights.js');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
