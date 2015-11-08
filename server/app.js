@@ -111,25 +111,25 @@ function getEventsFromDates(startDate,endDate,city,callback){
 }
 
 function getEventsFromLikes(){
-    var eventsFromLikes = [];
-    for (cityEvent in cityEvents){
-        currentCity = {};
-        currentCity.city = cityEvents[cityEvent].city;
-        currentCity.flight = cityEvents[cityEvent].flight;
-        currentCity.events = [];
-        for(event in cityEvents[cityEvent].events){
-            for(like in userFacebookLikes){
-                var eventName = cityEvents[cityEvent].events[event].name;
-                var userLike = userFacebookLikes[like].name;
-               //if(userLike &&  eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
-               //    currentCity.events.push(cityEvents[cityEvent].events[event]);
-               //}
-                currentCity.events.push(cityEvents[cityEvent].events[event]);
-            }
-        }
-        eventsFromLikes.push(currentCity);
-    }
-    return eventsFromLikes;
+    //var eventsFromLikes = [];
+    //for (cityEvent in cityEvents){
+    //    currentCity = {};
+    //    currentCity.city = cityEvents[cityEvent].city;
+    //    currentCity.flight = cityEvents[cityEvent].flight;
+    //    currentCity.events = [];
+    //    for(event in cityEvents[cityEvent].events){
+    //        for(like in userFacebookLikes){
+    //            var eventName = cityEvents[cityEvent].events[event].name;
+    //            var userLike = userFacebookLikes[like].name;
+    //           //if(userLike &&  eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
+    //           //    currentCity.events.push(cityEvents[cityEvent].events[event]);
+    //           //}
+    //            currentCity.events.push(cityEvents[cityEvent].events[event]);
+    //        }
+    //    }
+    //    eventsFromLikes.push(currentCity);
+    //}
+    return cityEvents;
 }
 
 function getFlightByName(name){
