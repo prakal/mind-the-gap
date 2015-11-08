@@ -1,7 +1,16 @@
 angular.module('volare.events', ['ngMaterial'])
 
-.controller('EventsController', function ($scope, $http, $window, $timeout, $q) {
+.controller('EventsController', function ($scope, $http, $window, $timeout, $q, $mdDialog) {
     console.log('something happened');
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
     $scope.startDate = new Date();
     $scope.endDate = new Date();
     $scope.minDate = new Date(
@@ -44,6 +53,23 @@ angular.module('volare.events', ['ngMaterial'])
       $scope.chunkData = [];
       for (var i = 0; i < colorTiles.length; i++){
         $scope.chunkData.push({'tile': colorTiles[i],'data': res.data[i]});
+        $scope.showTabDialog = function(ev) {
+            $mdDialog.show({
+              templateUrl: 'tabDialog.tmpl.html',
+              targetEvent: ev,
+              clickOutsideToClose:true,
+              locals:{
+                items: $scope.chunkData[i]
+              }
+            })
+                .then(function(answer) {
+                  console.log('answer',answer);
+                  $scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                  $scope.status = 'You cancelled the dialog.';
+                });
+          };
+
       }
       function randomColor() {
         return COLORS[Math.floor(Math.random() * COLORS.length)];
@@ -58,6 +84,9 @@ angular.module('volare.events', ['ngMaterial'])
           return 3;
         }
       }
+
+
+
       }, function(res){
         // errorCallback
         console.log(res);
