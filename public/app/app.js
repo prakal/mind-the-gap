@@ -1,12 +1,12 @@
-angular.module('volare', ['volare.auth','ngRoute','ngMaterial'])
+angular.module('volare', ['volare.events','volare.auth','ngRoute','ngMaterial'])
 .config(function($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: 'index.html',
-      controller: 'DemoController'
-    })
+    // .when('/', {
+    //   templateUrl: 'index.html',
+    //   controller: 'DemoController'
+    // })
     .when('/events', {
-      templateUrl: 'events/events.html',
+      templateUrl: 'app/events/events.html',
       controller: 'EventsController',
       // authenticate: true,
     })
@@ -16,7 +16,7 @@ angular.module('volare', ['volare.auth','ngRoute','ngMaterial'])
       // authenticate: true,
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/events'
     });
 
     // We add our $httpInterceptor into the array
