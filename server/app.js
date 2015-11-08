@@ -218,6 +218,7 @@ app.post('/volare/search/',function(req,res){
     var startDate = req.body.startDate;
     var endDate = req.body.endDate;
     var city = 0;
+    cityEvents = [];
 
     if(datesAreValid(startDate,endDate)) {
         flights = getFlights(startDate, endDate);
