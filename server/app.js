@@ -121,9 +121,10 @@ function getEventsFromLikes(){
             for(like in userFacebookLikes){
                 var eventName = cityEvents[cityEvent].events[event].name;
                 var userLike = userFacebookLikes[like].name;
-               if(userLike &&  eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
-                   currentCity.events.push(cityEvents[cityEvent].events[event]);
-               }
+               //if(userLike &&  eventName.toLowerCase().indexOf(userLike.toLocaleLowerCase()) > -1 ) {
+               //    currentCity.events.push(cityEvents[cityEvent].events[event]);
+               //}
+                currentCity.events.push(cityEvents[cityEvent].events[event]);
             }
         }
         eventsFromLikes.push(currentCity);

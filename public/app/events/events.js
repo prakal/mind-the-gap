@@ -27,7 +27,7 @@ angular.module('volare.events', ['ngMaterial'])
       };
     $scope.search = function(event){
       console.log('seaRch triggered', $window.ourStartDate, $window.ourEndDate);
-      $http.post('/volare/search/', {'startDate':$window.ourStartDate.yyyymmdd(),'endDate':$window.ourEndDate.yyyymmdd()}).then(function(){successCallback}, function(){errorCallback});
+      $http.post('/volare/search/', {'startDate':$window.ourStartDate.yyyymmdd(),'endDate':$window.ourEndDate.yyyymmdd()}).then(function(response){console.log(response)}, function(){});
     };
     $scope.setNewDate = function(){
       $window.ourStartDate = $scope.startDate;
