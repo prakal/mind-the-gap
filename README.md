@@ -1,4 +1,4 @@
-# mind-the-gap
+# mind-the-gap presents Volare!
 Social flight recommendation platform!
 
 Responsive webapp for flight recommendations from Facebook likes using Angular and Material UI. 
